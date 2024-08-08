@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "./";
+
+
+message HelloRequest {
+    string name = 1;
+};
+
+message HellResponse {
+    string message = 1;
+}
+
+//run protoc command
+// protoc --go-grpc_out=. --go_out=. *.proto
+
+
+
+service HelloService {
+    rpc SayHello (HelloRequest) returns (HellResponse);
+
+    rpc SayHelloServerStreaming (HelloRequest) returns (stream HellResponse);
+
+    rpc SayHelloClientStreaming (stream HelloRequest) returns (HellResponse);
+
+    rpc SayHelloBidirectionalStreaming (stream HelloRequest) returns (stream HellResponse);
+}
